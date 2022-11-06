@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+    <head th:include="layout :: head"></head>
+
+    <body>
+        <nav th:replace="layout :: menu"></nav>
+        <main class="container">
+            <form th:action="@{/produtos/(form)}" method="POST" th:object="${produto}">
+                <input type="hidden" th:field="*{id}">
+                <div class="form-group">
+                    <label for="txt-nome">Nome:</label>
+                    <input type="text" th:field="*{nome}" class="form-control" id="txt-nome">
+                </div>
+                <div class="form-group">
+                    <label for="txt-descricao">Descrição:</label>
+                    <input type="text" th:field="*{descricao}" class="form-control" id="txt-descricao">
+                </div>
+                <div class="form-group">
+                    <label for="txt-valor">Valor:</label>
+                    <input type="text" th:field="*{valor}" class="form-control" id="txt-valor">
+                </div>
+                <div class="form-group">
+                    <label for="txt-cidadde">Cidade:</label>
+                    <select class="form-select" name="cidade" id="txt-cidade" th:field="*{cidadeOrigem}">
+                        <option th:each="umaCidade : ${listaCidades}" th:value="${umaCidade.id}" th:text="${umaCidade.getNome()}"></option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Enviar</button>
+            </form>
+        </main>
+        <footer th:include="layout :: footer"></footer>
+    </body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+    <head th:include="layout :: head"></head>
+
+    <body>
+        <nav th:replace="layout :: menu"></nav>
+        <main class="container">
+            <a href="/cidades/nova" class="btn btn-primary">Nova</a>
+            <table class="table" id="tabcidades">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="cidade : ${listaCidades}">
+                        <td th:text="${cidade.id}"></td>
+                        <td th:text="${cidade.nome}"></td>
+                        <td>
+                            <a th:href="@{'/cidades/alterar/' + ${cidade.id}}" class="btn btn-warning">Alterar</a>
+                            <button class="btn btn-danger js-delete" th:data-id="${cidade.id}">Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table> 
+        </main>
+        <div class="modal" tabindex="-1" id="modalcidade">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Excluir Cidade</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <p>Confirma a exclusão da cidade?</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" id="btncancelar" data-bs-dismiss="modal">Cancelar</button>
+                  <button type="button" class="btn btn-primary" id="btnsim">Sim</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        <footer th:include="layout :: footer"></footer>
+        <script th:src="@{/scriptCidade.js}"></script>
+    </body>
+</html>
